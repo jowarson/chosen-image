@@ -2,8 +2,9 @@
  * Chosen jQuery plugin to add an image to the dropdown items.
  */
 (function($) {
-    $.fn.chosenImage = function(options) {
+    $.fn.chosenImageJos = function(options) {
         return this.each(function() {
+
             var $select = $(this);
             var imgMap  = {};
 
@@ -18,7 +19,7 @@
             $select.chosen(options);
             var $chosen = $select.next('.chosen-container').addClass('chosenImage-container');
 
-            // 3. Style lis with image sources.
+            // 3. Style list with image sources.
             $chosen.on('mousedown.chosen, keyup.chosen', function(event){
                 $chosen.find('.chosen-results li').each(function() {
                     var imgIndex = $(this).attr('data-option-array-index');
@@ -26,12 +27,21 @@
                 });
             });
 
-            // 4. Change image on chosen selected element when form changes.
+            // 4.1. Change image on chosen selected element when form changes.
             $select.change(function() {
+                setSelectedImage();
+            });
+
+            // 4.2. Change image on chosen selected element when form changes.
+            $(document).ajaxStop(function() {
+                setSelectedImage();
+            });
+
+            // Set selected image
+            function setSelectedImage() {
                 var imgSrc = $select.find('option:selected').attr('data-img-src') || '';
                 $chosen.find('.chosen-single span').css(cssObj(imgSrc));
-            });
-            $select.trigger('change');
+            }
 
             // Utilties
             function cssObj(imgSrc) {
