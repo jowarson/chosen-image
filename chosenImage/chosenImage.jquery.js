@@ -2,7 +2,7 @@
  * Chosen jQuery plugin to add an image to the dropdown items.
  */
 (function($) {
-    $.fn.chosenImageJos = function(options) {
+    $.fn.chosenImage = function(options) {
         return this.each(function() {
 
             var $select = $(this);
