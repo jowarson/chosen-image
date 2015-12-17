@@ -32,8 +32,13 @@
                 setSelectedImage();
             });
 
-            // 4.2. Change image on chosen selected element when form changes.
+            // 4.2. Change image on chosen selected element when form ajax is finished.
             $(document).ajaxStop(function() {
+                setSelectedImage();
+            });
+
+            // 4.3. Change image on chosen selected element when form/page is loaded.
+            $(document).ready(function() {
                 setSelectedImage();
             });
 
